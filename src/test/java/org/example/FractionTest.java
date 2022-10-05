@@ -75,7 +75,7 @@ class FractionTest {
         Fraction f3 = new Fraction(1, 0);
         Assertions.assertEquals(1, f3.getDivisor());
     }
-    //test
+
     @org.junit.jupiter.api.Test
     void setDivisor() {
         Fraction f = new Fraction(1, 10);
