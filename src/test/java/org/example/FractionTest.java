@@ -44,6 +44,11 @@ class FractionTest {
         System.out.println(postgres.getClientInfo());
         PreparedStatement db = mysql.prepareStatement("CREATE DATABASE `db`");
         Assertions.assertFalse(db.execute());
+        // disconnect from server
+        mysql.close();
+        mysql = connect("jdbc:mysql://localhost:3306/db?user=root&password=root");
+        Assertions.assertNotNull(mysql);
+        // reconnect to server + database
 
         PreparedStatement table = mysql.prepareStatement("CREATE TABLE `db.Persons` ( `Name` varchar(255) )");
         Assertions.assertFalse(table.execute());
