@@ -3,6 +3,8 @@ package org.example;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Connection;
+
 class FractionTest {
 
     @org.junit.jupiter.api.Test
@@ -192,7 +194,13 @@ class FractionTest {
         f2.shorten();
         Assertions.assertEquals(7, f2.getDividend());
         Assertions.assertEquals(-66, f2.getDivisor());
+    }
 
+    @Test
+    void connectToDatabase(){
+        Connection connection = DbConnector.getConnection(5432, "postgres_db",
+                "postgres_user","postgres_password");
+        Assertions.assertNotEquals(connection, null);
 
     }
 }

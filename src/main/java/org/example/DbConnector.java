@@ -1,0 +1,38 @@
+package org.example;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DbConnector {
+
+    private static Connection connection = null;
+
+    private DbConnector() {
+    }
+
+    public static synchronized Connection getConnection(int port, String db, String usr, String passwd){
+        if (connection == null) {
+            connection = createConnection( port,  db, usr, passwd);
+        }
+        return connection;
+    }
+
+    private static Connection createConnection(int port, String db, String usr, String passwd) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            //+"/"+db+"?useSSL=false", usr, passwd
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:"+port);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return connection;
+    }
+
+}
