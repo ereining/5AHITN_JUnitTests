@@ -222,8 +222,10 @@ class FractionTest {
             throw new RuntimeException(e);
         }
 
-        Connection test = connect("jdbc:postgresql://localhost:5432/postgres_db?" +
-                "user=postgres_user&password=postgres_password");
+        Connection test = connect("jdbc:postgresql://localhost:5432/postgres?" +
+                "user=postgres&password=postgres");
         System.out.println(test.getClientInfo());
     }
+
+
 }
