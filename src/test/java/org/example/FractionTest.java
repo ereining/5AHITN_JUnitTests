@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 class FractionTest {
 
@@ -200,6 +201,11 @@ class FractionTest {
     void connectToDatabase(){
         Connection connection = DbConnector.getConnection(5432, "postgres_db",
                 "postgres_user","postgres_password");
+        try {
+            System.out.println(connection.getSchema());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         Assertions.assertNotEquals(connection, null);
 
     }
