@@ -25,8 +25,8 @@ public class DbConnector {
             e.printStackTrace();
         }
         try {
-            //+"/"+db+"?useSSL=false", usr, passwd
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:"+port);
+
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:"+port+"/"+db+"?useSSL=false", usr, passwd);
         } catch (SQLException e) {
             e.printStackTrace();
         }
