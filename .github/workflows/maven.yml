@@ -85,7 +85,7 @@ jobs:
         run: mvn --batch-mode -DskipTests package
       - name: copy .jar for uploading
         run: mkdir staging && cp target/*.jar staging
-      - name: upload artifact
+      - name: upload artifact33
         uses: actions/upload-artifact@v3
         with:
           name: Package

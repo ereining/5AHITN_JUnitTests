@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 class FractionTest {
@@ -34,9 +35,23 @@ class FractionTest {
             throw new RuntimeException(e);
         }
 
-      Connection test = connect("jdbc:postgresql://localhost:5432/postgres?" +
+        Connection postgres = connect("jdbc:postgresql://localhost:5432/postgres?" +
                 "user=postgres&password=postgres");
-        System.out.println(test.getClientInfo());
+        Assertions.assertNotNull(postgres);
+        Connection mysql = connect("jdbc:mysql://localhost:3306?user=root&password=root");
+        Assertions.assertNotNull(mysql);
+
+        System.out.println(postgres.getClientInfo());
+        PreparedStatement db = mysql.prepareStatement("CREATE DATABASE `db`");
+        Assertions.assertFalse(db.execute());
+
+        PreparedStatement table = mysql.prepareStatement("CREATE TABLE `db.Persons` ( `Name` varchar(255) )");
+        Assertions.assertFalse(table.execute());
+
+        PreparedStatement row = mysql.prepareStatement("INSERT INTO `db.Persons` ( `Name` )  values " +
+                "( 'Marco' )");
+        Assertions.assertFalse(row.execute());
+
     }
 
 
