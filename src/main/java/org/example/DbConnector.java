@@ -20,7 +20,7 @@ public class DbConnector {
 
     private static Connection createConnection(int port, String db, String usr, String passwd) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
