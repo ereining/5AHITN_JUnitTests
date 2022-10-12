@@ -249,34 +249,5 @@ class FractionTest {
         Assertions.assertEquals(-66, f2.getDivisor());
     }
 
-    private static Connection connect(String connectionString){
-        Connection conn = null;
-
-        try {
-            conn = DriverManager.getConnection(connectionString);
-
-        } catch (SQLException ex) {
-            // handle any errors
-            System.out.println("SQLException: " + ex.getMessage());
-            System.out.println("SQLState: " + ex.getSQLState());
-            System.out.println("VendorError: " + ex.getErrorCode());
-        }
-
-        return  conn;
-    }
-
-    @Test
-    void connectToDatabase() throws SQLException {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        Connection test = connect("jdbc:postgresql://localhost:5432/postgres?" +
-                "user=postgres&password=postgres");
-        System.out.println(test.getClientInfo());
-    }
-
 
 }
