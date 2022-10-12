@@ -26,7 +26,7 @@ public class DbConnector {
         }
         try {
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:"+port+"/"+db+"?useSSL=false", usr, passwd);
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:"+port+"/"+db+"?useSSL=false", usr, passwd);
         } catch (SQLException e) {
             e.printStackTrace();
         }

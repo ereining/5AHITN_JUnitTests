@@ -201,11 +201,6 @@ class FractionTest {
     void connectToDatabase(){
         Connection connection = DbConnector.getConnection(5432, "postgres_db",
                 "postgres_user","postgres_password");
-        try {
-            System.out.println(connection.getSchema());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         Assertions.assertNotEquals(connection, null);
 
     }
