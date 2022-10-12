@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 class FractionTest {
@@ -197,11 +198,32 @@ class FractionTest {
         Assertions.assertEquals(-66, f2.getDivisor());
     }
 
-    @Test
-    void connectToDatabase(){
-        Connection connection = DbConnector.getConnection(5432, "postgres_db",
-                "postgres_user","postgres_password");
-        Assertions.assertNotEquals(connection, null);
+    private static Connection connect(String connectionString){
+        Connection conn = null;
 
+        try {
+            conn = DriverManager.getConnection(connectionString);
+
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+        return  conn;
+    }
+
+    @Test
+    void connectToDatabase() throws SQLException {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        Connection test = connect("jdbc:postgresql://localhost:5432/postgres_db?" +
+                "user=postgres_user&password=postgres_password");
+        System.out.println(test.getClientInfo());
     }
 }
