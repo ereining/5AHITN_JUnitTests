@@ -30,7 +30,7 @@ jobs:
           POSTGRES_USER: postgres_user
         ports:
           # maps tcp port 5432 on service container to the host
-          - 5432:5432
+          - 4306:5432
         # set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
