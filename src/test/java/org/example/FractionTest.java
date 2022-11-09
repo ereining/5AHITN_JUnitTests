@@ -47,15 +47,21 @@ class FractionTest {
         // reconnect to server + database
 
         PreparedStatement table = mysql.prepareStatement("CREATE TABLE `db.Persons` ( `Name` varchar(255) )");
+        table.close();
         Assertions.assertFalse(table.execute());
 
         PreparedStatement row = mysql.prepareStatement("INSERT INTO `db.Persons` ( `Name` )  values (?) ");
+        table.close();
         row.setString(1,"Marco");
         Assertions.assertFalse(row.execute());
 
         PreparedStatement select = mysql.prepareStatement("SELECT * from `db.Persons`");
-        Assertions.assertFalse(row.execute());
+        ResultSet rs = select.executeQuery();
+        if(rs.next()){
+          Assertions.assertEquals("Marco", rs.getString(1));
+        }
 
+        mysql.close();
     }
 
 
