@@ -53,13 +53,13 @@ class FractionTest {
         row.setString(1,"Marco");
         Assertions.assertFalse(row.execute());
 
-        /*
-        PreparedStatement select = mysql.prepareStatement("SELECT * from `db.Persons` LIMIT 1");
+
+        PreparedStatement select = mysql.prepareStatement("SELECT * from `db.Persons`");
         ResultSet rs = select.executeQuery();
-        if(rs.first()){
+        if(rs.next()){
           Assertions.assertEquals("Marco", rs.getString(1));
         }
-        */
+
         PreparedStatement deleteRow = mysql.prepareStatement("DELETE FROM `db.Persons`");
         Assertions.assertFalse(deleteRow.execute());
 
