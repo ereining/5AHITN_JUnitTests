@@ -54,8 +54,7 @@ class FractionTest {
         Assertions.assertFalse(row.execute());
 
         PreparedStatement select = mysql.prepareStatement("SELECT * from `db.Persons`");
-        System.out.println(select.executeQuery().getString(1));
-        Assertions.assertEquals("Marco", select.executeQuery().getString(1));
+        Assertions.assertFalse(row.execute());
 
     }
 
