@@ -47,19 +47,29 @@ class FractionTest {
         // reconnect to server + database
 
         PreparedStatement table = mysql.prepareStatement("CREATE TABLE `db.Persons` ( `Name` varchar(255) )");
-        table.close();
         Assertions.assertFalse(table.execute());
 
         PreparedStatement row = mysql.prepareStatement("INSERT INTO `db.Persons` ( `Name` )  values (?) ");
-        table.close();
         row.setString(1,"Marco");
         Assertions.assertFalse(row.execute());
 
-        PreparedStatement select = mysql.prepareStatement("SELECT * from `db.Persons`");
+        /*
+        PreparedStatement select = mysql.prepareStatement("SELECT * from `db.Persons` LIMIT 1");
         ResultSet rs = select.executeQuery();
-        if(rs.next()){
+        if(rs.first()){
           Assertions.assertEquals("Marco", rs.getString(1));
         }
+        */
+        PreparedStatement deleteRow = mysql.prepareStatement("DELETE FROM `db.Persons`");
+        Assertions.assertFalse(deleteRow.execute());
+
+        PreparedStatement deleteTable = mysql.prepareStatement("DROP  TABLE `db.Persons` ");
+        Assertions.assertFalse(deleteTable.execute());
+
+        PreparedStatement deleteDB = mysql.prepareStatement("DROP DATABASE `db`");
+        Assertions.assertFalse(deleteDB.execute());
+
+
 
         mysql.close();
     }
