@@ -3,11 +3,7 @@ package org.example;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-
-import java.sql.SQLException;
+import java.sql.*;
 
 class FractionTest {
 
@@ -56,6 +52,9 @@ class FractionTest {
         PreparedStatement row = mysql.prepareStatement("INSERT INTO `db.Persons` ( `Name` )  values " +
                 "( 'Marco' )");
         Assertions.assertFalse(row.execute());
+
+        PreparedStatement select = mysql.prepareStatement("SELECT * from `db.Persons`");
+        Assertions.assertFalse(select.execute());
 
     }
 
