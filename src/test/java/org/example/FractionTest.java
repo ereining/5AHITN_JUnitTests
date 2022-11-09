@@ -49,12 +49,12 @@ class FractionTest {
         PreparedStatement table = mysql.prepareStatement("CREATE TABLE `db.Persons` ( `Name` varchar(255) )");
         Assertions.assertFalse(table.execute());
 
-        PreparedStatement row = mysql.prepareStatement("INSERT INTO `db.Persons` ( `Name` )  values " +
-                "( 'Marco' )");
+        PreparedStatement row = mysql.prepareStatement("INSERT INTO `db.Persons` ( `Name` )  values ?");
+        row.setString(1,"Marco");
         Assertions.assertFalse(row.execute());
 
         PreparedStatement select = mysql.prepareStatement("SELECT * from `db.Persons`");
-        Assertions.assertFalse(select.execute());
+        Assertions.assertEquals("Marco", select.executeQuery().getString(1));
 
     }
 
